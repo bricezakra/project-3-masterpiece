@@ -1,24 +1,78 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+import "mapbox-gl/dist/mapbox-gl.css"
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css"
+import React, { Component } from 'react'
+import MapGL from "react-map-gl";
+import DeckGL, { GeoJsonLayer } from "deck.gl";
+import Geocoder from "react-map-gl-geocoder";
 
-function App() {
-  return (
-    <Router>
-      <div>
-        <Nav />
-        <Switch>
-          <Route exact path="/" component={Books} />
-          <Route exact path="/books" component={Books} />
-          <Route exact path="/books/:id" component={Detail} />
-          <Route component={NoMatch} />
-        </Switch>
-      </div>
-    </Router>
-  );
+const token = "pk.eyJ1IjoiYnJpY2V6YWtyYSIsImEiOiJjazJwbmR3bmcwNjRmM25wZ2VmaTM3MHJ0In0.5F4SAt1Rtc-MXzjv6wxWaQ"
+
+class SearchableMap extends Component {
+  state = { 
+    viewport :{
+      latitude: 0,
+      longitude: 0,
+      zoom: 1
+    },
+    searchResultLayer: null
+  }
+
+  mapRef = React.createRef()
+
+  handleViewportChange = viewport => {
+    this.setState({
+      viewport: { ...this.state.viewport, ...viewport }
+    })
+  }
+  // if you are happy with Geocoder default settings, you can just use handleViewportChange directly
+  handleGeocoderViewportChange = viewport => {
+    const geocoderDefaultOverrides = { transitionDuration: 1000 };
+
+    return this.handleViewportChange({
+      ...viewport,
+      ...geocoderDefaultOverrides
+    });
+  };
+
+  handleOnResult = event => {
+    this.setState({
+      searchResultLayer: new GeoJsonLayer({
+        id: "search-result",
+        data: event.result.geometry,
+        getFillColor: [255, 0, 0, 128],
+        getRadius: 1000,
+        pointRadiusMinPixels: 10,
+        pointRadiusMaxPixels: 10
+      })
+    })
+  }
+
+    render(){
+      const { viewport, searchResultLayer} = this.state
+      return (
+        <div style={{ height: '100vh'}}>
+          <h1 style={{textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}>Use the search bar to find a location or click <a href="/">here</a> to find your location</h1>
+          <MapGL 
+            ref={this.mapRef}
+            {...viewport}
+            mapStyle="mapbox://styles/bricezakra/ck2psrdx91xod1cq8jz5q18bp"
+            width="100%"
+            height="90%"
+            onViewportChange={this.handleViewportChange}
+            mapboxApiAccessToken={token}
+            >
+              <Geocoder 
+                mapRef={this.mapRef}
+                onResult={this.handleOnResult}
+                onViewportChange={this.handleGeocoderViewportChange}
+                mapboxApiAccessToken={token}
+                position='top-left'
+              />
+            </MapGL>
+            <DeckGL {...viewport} layers={[searchResultLayer]} />
+        </div>
+      )
+    }
 }
 
-export default App;
+export default SearchableMap;
