@@ -6,7 +6,7 @@
 
 # Deployed at: 
 
-(heroku link: ...)
+https://evening-bayou-77804.herokuapp.com/
 
 
 
@@ -14,15 +14,13 @@
 # Project Requirements:
 
 
- 01 - ... ;
+ 01 - MongoDB or MySQL;
 
- 02 - ... ;
+ 02 - EXPRESS;
 
- 03 - ... ;
+ 03 - REACT.JS;
 
- 04 - ... ;
-
- 05 - (...) .
+ 04 - NODE.JS;
 
 
 
@@ -33,7 +31,7 @@
 # Bonus:
 
 
- 01 - (...) ;
+ 01 - (...) (Still thinking about it!) ;
 
  02 - (...) .
 
