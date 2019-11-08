@@ -8,14 +8,14 @@ import Geocoder from "react-map-gl-geocoder";
 const token = "pk.eyJ1IjoiYnJpY2V6YWtyYSIsImEiOiJjazJwbmR3bmcwNjRmM25wZ2VmaTM3MHJ0In0.5F4SAt1Rtc-MXzjv6wxWaQ"
 
 class SearchableMap extends Component {
-  state = { 
-    viewport :{
-      latitude: 0,
-      longitude: 0,
-      zoom: 1
-    },
-    searchResultLayer: null
-  }
+    state = {
+        viewport: {
+            latitude: 0,
+            longitude: 0,
+            zoom: 1
+        },
+        searchResultLayer: null
+    }
 
   mapRef = React.createRef()
 
@@ -55,7 +55,7 @@ class SearchableMap extends Component {
           <MapGL 
             ref={this.mapRef}
             {...viewport}
-            mapStyle="mapbox://styles/bricezakra/ck2psrdx91xod1cq8jz5q18bp"
+            mapStyle="mapbox://styles/bricezakra/ck2qg2zu01a7f1crr4um6nlic"
             width="100%"
             height="90%"
             onViewportChange={this.handleViewportChange}

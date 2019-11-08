@@ -47,7 +47,7 @@
 
 # 01 - Project Title: 
 
-Mr. COOL LOCALIZER
+RENDEZ-VOUS APP
 
 
 # 02 - Team Members:
@@ -60,15 +60,15 @@ Mr. COOL LOCALIZER
 
 # 03 – Project Description:
 
-Our application is a fancy map localizer engine. It will allow the user to share his/her location via API address or from a web browser. The user will also have the option to write a note as well for an eventual meetup or for safety purpose.
+RENDEZ-VOUS is a meetup suggestion engine application. The user can set up an appointment with other users at a specified place (bar, restaurant, etc), at a specific time (thursday,6pm for happy hour or wednesday, 11am for brunch, etc). The host of the rendez-vous can set a max/min number of attendees for their event.
 
 
 
 # 04 – APIs to be used:
 
-Google map or Mapbox (Interactive Map in React) (Just a thought! Still thinking about other APIs to make the app sophisticated); 
-(...);
-(...).
+Mapbox; 
+Socket.io;
+Redox.
 
 
 
