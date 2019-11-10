@@ -86,7 +86,7 @@ Redox.
 
 # 06 – Sketch of the design sketch (Open link below):
 
-![alt text](...)
+![alt text](file:///home/coderx/Downloads/GITHUB_REPOSITORIES/University%20of%20Texas%20Austin%20_%20CODING%20BOOTCAMP%20_%20Homework%20Repositories/PROJECT03_CAPSTONE_UT/project03/client/src/image/20191110_083613.jpg)
 
 
 
