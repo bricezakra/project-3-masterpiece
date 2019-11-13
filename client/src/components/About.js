@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function Shop() {
+function About() {
     return (
         <div  style={{ marginLeft: 64 }}> 
             <h1> About </h1>
@@ -9,4 +9,4 @@ function Shop() {
     )
 }
 
-export default Shop
+export default About
