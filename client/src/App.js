@@ -1,78 +1,125 @@
-import "mapbox-gl/dist/mapbox-gl.css"
-import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css"
-import React, { Component } from 'react'
-import MapGL from "react-map-gl";
-import DeckGL, { GeoJsonLayer } from "deck.gl";
+// import "mapbox-gl/dist/mapbox-gl.css";
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import "./App.css";
+import React from "react";
+import ReactMapGL, { GeolocateControl, NavigationControl, Marker } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 
-const token = "pk.eyJ1IjoiYnJpY2V6YWtyYSIsImEiOiJjazJwbmR3bmcwNjRmM25wZ2VmaTM3MHJ0In0.5F4SAt1Rtc-MXzjv6wxWaQ"
-
-class SearchableMap extends Component {
-    state = {
-        viewport: {
-            latitude: 0,
-            longitude: 0,
-            zoom: 1
-        },
-        searchResultLayer: null
-    }
-
-  mapRef = React.createRef()
+const MAPBOX_TOKEN ="pk.eyJ1IjoiYnJpY2V6YWtyYSIsImEiOiJjazJwbmR3bmcwNjRmM25wZ2VmaTM3MHJ0In0.5F4SAt1Rtc-MXzjv6wxWaQ";
+class App extends React.Component {
+  state = {
+    viewport: {
+      width: "100vw",
+      height: "100vh",
+      latitude: 40.7250863,
+      longitude: -73.9773608,
+      zoom: 11
+    },
+    wifiHotspots: [],
+    userLocation: {}
+  };
+  myMap = React.createRef();
 
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
-    })
-  }
-  // if you are happy with Geocoder default settings, you can just use handleViewportChange directly
-  handleGeocoderViewportChange = viewport => {
-    const geocoderDefaultOverrides = { transitionDuration: 1000 };
-
-    return this.handleViewportChange({
-      ...viewport,
-      ...geocoderDefaultOverrides
     });
   };
 
-  handleOnResult = event => {
-    this.setState({
-      searchResultLayer: new GeoJsonLayer({
-        id: "search-result",
-        data: event.result.geometry,
-        getFillColor: [255, 0, 0, 128],
-        getRadius: 1000,
-        pointRadiusMinPixels: 10,
-        pointRadiusMaxPixels: 10
-      })
-    })
+  setUserLocation = () => {
+    navigator.geolocation.getCurrentPosition(position => {
+       let setUserLocation = {
+           lat: position.coords.latitude,
+           long: position.coords.longitude
+        };
+       let newViewport = {
+          height: "100vh",
+          width: "100vw",
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          zoom: 10
+        };
+        this.setState({
+          viewport: newViewport,
+          userLocation: setUserLocation
+       });
+    });
+  };
+
+  componentDidMount() {
+    this.fetchStationAPI();
   }
 
-    render(){
-      const { viewport, searchResultLayer} = this.state
+  filterFreeWifi = hotspots => {
+    return hotspots.filter(spot => {
+        return spot.type === "Free";
+     });
+  };
+  
+  fetchStationAPI = () => {
+    fetch("https://data.cityofnewyork.us/resource/yjub-udmw.json")
+    .then(res => res.json())
+    .then(hotspots => {
+       let freeWifi = this.filterFreeWifi(hotspots);
+       this.setState({
+         wifiHotspots: freeWifi
+        });
+    });
+  };
+
+  loadWifiMarkers = () => {
+    return this.state.wifiHotspots.map(spot => {
       return (
-        <div style={{ height: '100vh'}}>
-          <h1 style={{textAlign: 'center', fontSize: '25px', fontWeight: 'bolder' }}>Use the search bar to find a location or click <a href="/">here</a> to find your location</h1>
-          <MapGL 
-            ref={this.mapRef}
-            {...viewport}
-            mapStyle="mapbox://styles/bricezakra/ck2qg2zu01a7f1crr4um6nlic"
-            width="100%"
-            height="90%"
+        <Marker
+           key={spot.objectid}
+           latitude={parseFloat(spot.latitude)}
+           longitude={parseFloat(spot.longitude)}
+        >
+          <img src="/wifi.svg" alt="" />
+        </Marker>
+      );
+    });
+  };
+
+  render() {
+    console.log(this.state.viewport);
+    return (
+      <div className="App">
+        <button onClick={this.setUserLocation}>My location</button>
+        <div className="map">
+          <ReactMapGL
+            ref={this.myMap}
+            {...this.state.viewport}
+            width="100vw"
+            height="100vh"
             onViewportChange={this.handleViewportChange}
-            mapboxApiAccessToken={token}
-            >
-              <Geocoder 
-                mapRef={this.mapRef}
-                onResult={this.handleOnResult}
-                onViewportChange={this.handleGeocoderViewportChange}
-                mapboxApiAccessToken={token}
-                position='top-left'
-              />
-            </MapGL>
-            <DeckGL {...viewport} layers={[searchResultLayer]} />
+            mapStyle="mapbox://styles/bricezakra/ck2psrdx91xod1cq8jz5q18bp"
+            mapboxApiAccessToken={MAPBOX_TOKEN}
+          >
+            <Geocoder
+              position="top-left"
+              mapRef={this.myMap}
+              mapboxApiAccessToken={MAPBOX_TOKEN}
+             onViewportChange={this.handleViewportChange}
+            />
+            <GeolocateControl />
+            <NavigationControl />
+            {Object.keys(this.state.userLocation).length !== 0 ? (
+              <Marker
+                latitude={this.state.userLocation.lat}
+                longitude={this.state.userLocation.long}
+              >
+                <img className="location-icon" src="location-icon.jpg"/>
+              </Marker>
+            ) : ( 
+               <div>Empty</div>
+            )}
+            {this.loadWifiMarkers()}
+          </ReactMapGL>
         </div>
-      )
-    }
+      </div>
+    );
+  }
 }
 
-export default SearchableMap;
+export default App;
