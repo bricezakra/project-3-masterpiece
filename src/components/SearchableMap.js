@@ -109,11 +109,7 @@ class SearchableMap extends React.Component {
                 latitude={this.state.userLocation.lat}
                 longitude={this.state.userLocation.long}
               >
-<<<<<<< HEAD:src/components/SearchableMap.js
                 <img className="location-icon" src="location-icon.jpg" alt="" />
-=======
-                <img className="location-icon" src="location-icon.png"/>
->>>>>>> 43fe7a313e58b25d4860f4ddc2f1f4bce4dbd95b:client/src/App.js
               </Marker>
             ) : ( 
                <div></div>
