@@ -75,7 +75,7 @@ class App extends React.Component {
            latitude={parseFloat(spot.latitude)}
            longitude={parseFloat(spot.longitude)}
         >
-          <img src="/wifi.svg" alt="" />
+          <img src="/wifi.png" alt="" />
         </Marker>
       );
     });
@@ -109,7 +109,7 @@ class App extends React.Component {
                 latitude={this.state.userLocation.lat}
                 longitude={this.state.userLocation.long}
               >
-                <img className="location-icon" src="location-icon.jpg"/>
+                <img className="location-icon" src="location-icon.png"/>
               </Marker>
             ) : ( 
                <div>Empty</div>
