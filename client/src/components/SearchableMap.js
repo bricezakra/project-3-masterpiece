@@ -90,7 +90,7 @@ class SearchableMap extends React.Component {
           <ReactMapGL
             ref={this.myMap}
             {...this.state.viewport}
-            width="100vw"
+            width="100%"
             height="100vh"
             onViewportChange={this.handleViewportChange}
             mapStyle="mapbox://styles/bricezakra/ck2psrdx91xod1cq8jz5q18bp"

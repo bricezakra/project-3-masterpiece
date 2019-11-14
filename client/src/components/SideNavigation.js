@@ -80,8 +80,8 @@ function SideNavigation() {
 }
 
 const Home = () => (
-    <div>
-      <h1> Home Page</h1>
+    <div style={{ marginLeft: 64 }}>
+      <h1 > Home Page</h1>
     </div>
   )
 
