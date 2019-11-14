@@ -6,8 +6,6 @@ import SideNavigation from './components/SideNavigation';
 
 
 class App extends Component {
-    
-
     render(){
       return (       
         // <Router>
