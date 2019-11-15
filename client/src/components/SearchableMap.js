@@ -105,7 +105,7 @@ class SearchableMap extends React.Component {
     return (
       <div className="App">
         <button onClick={this.setUserLocation}>My location</button>
-        <div className="map">
+        <div className="map" style={{ width:"100%"}}>
           <ReactMapGL
             style={{ marginLeft: 64 }}
             ref={this.myMap}
