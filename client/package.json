@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.5.0",
     "@trendmicro/react-sidenav": "^0.4.5",
     "axios": "^0.18.0",
     "deck.gl": "^7.3.4",

@@ -1,26 +1,23 @@
-
-import React, { Component } from 'react'
+import React from 'react'
 import SideNavigation from './components/SideNavigation';
+import { useAuth0 } from "./components/react-auth0-spa";
 
+function App() {
+  const { loading } = useAuth0();
 
+  if (loading) {
+    return (
+      <div>Loading...</div>
+    );
+  }
 
-
-class App extends Component {
-    
-
-    render(){
-      return (       
-        // <Router>
-          <SideNavigation />
-        //   <Switch>
-        //     <Route path="/" exact component={Home} />
-        //     <Route path="/map"  component={SearchableMap} />
-        //     <Route path="/about" component={About} />
-        //     <Route path="/shop" component={Shop} />
-        //   </Switch>
-        // </Router>
-      )
-    }
+  return (
+    <div className="App">
+      <header>
+        <SideNavigation />
+      </header>
+    </div>
+  );
 }
 
 

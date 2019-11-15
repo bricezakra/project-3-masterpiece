@@ -2,7 +2,7 @@
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import "../App.css";
 import React from "react";
-import ReactMapGL, { GeolocateControl, NavigationControl, Marker } from "react-map-gl";
+import ReactMapGL, { GeolocateControl, NavigationControl, Marker, Popup } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 
 const MAPBOX_TOKEN ="pk.eyJ1IjoiYnJpY2V6YWtyYSIsImEiOiJjazJwbmR3bmcwNjRmM25wZ2VmaTM3MHJ0In0.5F4SAt1Rtc-MXzjv6wxWaQ";
@@ -16,7 +16,8 @@ class SearchableMap extends React.Component {
       zoom: 11
     },
     wifiHotspots: [],
-    userLocation: {}
+    userLocation: {},
+    selectedHotspot: null
   };
   myMap = React.createRef();
 
@@ -67,6 +68,18 @@ class SearchableMap extends React.Component {
     });
   };
 
+  setSelectedHotspot = object => {
+    this.setState({
+       selectedHotspot: object
+    });
+  };
+
+  closePopup = () => {
+    this.setState({
+      selectedHotspot: null
+    }); 
+  };
+
   loadWifiMarkers = () => {
     return this.state.wifiHotspots.map(spot => {
       return (
@@ -75,7 +88,13 @@ class SearchableMap extends React.Component {
            latitude={parseFloat(spot.latitude)}
            longitude={parseFloat(spot.longitude)}
         >
-          <img src="/wifi.png" alt="" />
+          <img 
+            onClick={() => {
+              this.setSelectedHotspot(spot);
+            }}
+            src="/wifi.png" 
+            alt="" 
+          />
         </Marker>
       );
     });
@@ -84,13 +103,13 @@ class SearchableMap extends React.Component {
   render() {
     console.log(this.state.viewport);
     return (
-      <div className="App" style={{ marginLeft: 64 }}>
+      <div className="App">
         <button onClick={this.setUserLocation}>My location</button>
         <div className="map">
           <ReactMapGL
             ref={this.myMap}
             {...this.state.viewport}
-            width="100%"
+            width="100vw"
             height="100vh"
             onViewportChange={this.handleViewportChange}
             mapStyle="mapbox://styles/bricezakra/ck2psrdx91xod1cq8jz5q18bp"
@@ -102,24 +121,46 @@ class SearchableMap extends React.Component {
               mapboxApiAccessToken={MAPBOX_TOKEN}
              onViewportChange={this.handleViewportChange}
             />
-            <GeolocateControl />
-            <NavigationControl />
+            <GeolocateControl 
+              positionOptions={{ enableHighAccuracy: true }}
+              trackUserLocation={true}
+            />
+            <NavigationControl showCompass={true} showZoom={true}/>
             {Object.keys(this.state.userLocation).length !== 0 ? (
               <Marker
                 latitude={this.state.userLocation.lat}
                 longitude={this.state.userLocation.long}
               >
-                <img className="location-icon" src="location-icon.png" alt="" />
+                <img className="location-icon" src="location-icon.png" alt="marker beer-icon for location" />
               </Marker>
             ) : ( 
                <div></div>
             )}
             {this.loadWifiMarkers()}
+
+            {this.state.selectedHotspot !== null ? (
+              <Popup
+                latitude={parseFloat(this.state.selectedHotspot.latitude)}
+                longitude={parseFloat(this.state.selectedHotspot.longitude)}
+                onClose={this.closePopup}
+              >
+                <div>
+                  <p>
+                    <b>Location:</b> {this.state.selectedHotspot.location}{", "}
+                    {this.state.selectedHotspot.city}
+                  </p>
+                  <p>
+                    <b>Type:</b> {this.state.selectedHotspot.location_t}
+                  </p>
+                </div>
+              </Popup>
+            ) : null}
           </ReactMapGL>
         </div>
       </div>
     );
   }
 }
+
 
 export default SearchableMap;
