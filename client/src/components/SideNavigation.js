@@ -3,10 +3,11 @@ import React from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import About from './About';
-import Shop from './Shop';
+
 import SearchableMap from './SearchableMap';
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import AdvenTour from './AdvenTour';
 
 
 function SideNavigation() {
@@ -33,12 +34,12 @@ function SideNavigation() {
                                     About
                         </NavText>
                             </NavItem>
-                            <NavItem eventKey="shop">
+                            <NavItem eventKey="tour">
                                 <NavIcon>
                                     <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
                                 </NavIcon>
                                 <NavText>
-                                    Shop
+                                    AdvenTour
                         </NavText>
                             </NavItem>
                             <NavItem eventKey="map">
@@ -54,7 +55,7 @@ function SideNavigation() {
                     <main>
                         <Route path="/" exact component={props => <Home />} />
                         <Route path="/about" component={props => <About />} />
-                        <Route path="/shop" component={props => <Shop />} />
+                        <Route path="/tour" component={props => <AdvenTour />} />
                         <Route path="/map" component={props => <SearchableMap />} />
                     </main>
                 </React.Fragment>
