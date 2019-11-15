@@ -3,36 +3,30 @@
 
 
 
+
 # Deployed at: 
 
 https://evening-bayou-77804.herokuapp.com/
 
 
 
-
 # Project Requirements:
 
-
- 01 - MongoDB or MySQL;
+ 01 - MongoDB;
 
  02 - EXPRESS;
 
  03 - REACT.JS;
 
- 04 - NODE.JS;
-
-
-
-
+ 04 - NODE.JS.
 
 
 
 # Bonus:
 
+ 01 - TRELLO (for Project Management) ;
 
- 01 - (...) (Still thinking about it!) ;
-
- 02 - (...) .
+ 02 - Auth0 (for User Authentication Set Up).
 
 
 
@@ -42,9 +36,11 @@ https://evening-bayou-77804.herokuapp.com/
 
 
 
+
+
 # 01 - Project Title: 
 
-RENDEZ-VOUS APP
+WI_FINDER APP
 
 
 # 02 - Team Members:
@@ -55,9 +51,10 @@ RENDEZ-VOUS APP
 ##### Brice Zakra
 
 
+
 # 03 – Project Description:
 
-RENDEZ-VOUS is a meetup suggestion engine application. The user can set up an appointment with other users at a specified place (bar, restaurant, etc), at a specific time (thursday,6pm for happy hour or wednesday, 11am for brunch, etc). The host of the rendez-vous can set a max/min number of attendees for their event.
+WI-FINDER is a search WI-FI engine application. It helps the user to detect all the FREE WIRELESS HOTSPOTS in a defined radius according to its location. The app provides the address and the type of business offering the connection.
 
 
 
