@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import SideNavigation from './components/SideNavigation';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
