@@ -1,4 +1,3 @@
-
 # Project03 - CAPSTONE - UT Coding Bootcamp
 
 
@@ -87,11 +86,3 @@ Redox.
 # 06 – Sketch of the design sketch (Open link below):
 
 ![alt text](https://github.com/bricezakra/project-3-masterpiece/blob/master/client/src/image/image01.jpg)
-
-
-
-
-
-
-
-

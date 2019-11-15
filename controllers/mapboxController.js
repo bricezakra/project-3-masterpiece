@@ -4,7 +4,7 @@ const axios = require("axios");
 module.exports = {
     findKey: function(req, res) {
         const token = process.env.TOKEN_ACCESS_API
-        axios.get("/,", { headers: { "Authorizattion": `Bearer ${token}` } })
+        axios.get("/,", { headers: { "Authorization": `Bearer ${token}` } })
             .then(res => {
                 console.log(res.data);
 
