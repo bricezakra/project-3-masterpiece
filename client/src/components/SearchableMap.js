@@ -4,6 +4,7 @@ import "../App.css";
 import React from "react";
 import ReactMapGL, { GeolocateControl, NavigationControl, Marker, Popup } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
+import Background from '../images/background_image.png';
 
 const MAPBOX_TOKEN ="pk.eyJ1IjoiYnJpY2V6YWtyYSIsImEiOiJjazJwbmR3bmcwNjRmM25wZ2VmaTM3MHJ0In0.5F4SAt1Rtc-MXzjv6wxWaQ";
 class SearchableMap extends React.Component {
@@ -103,7 +104,8 @@ class SearchableMap extends React.Component {
   render() {
     console.log(this.state.viewport);
     return (
-      <div className="App">
+      <div style={{ backgroundImage: `url(${Background})`, height: 1200 }}>
+      <div className="App" style={{marginRight: 200, marginLeft: 200 }}>
         <button onClick={this.setUserLocation}>My location</button>
         <div className="map" style={{ width:"100%"}}>
           <ReactMapGL
@@ -158,6 +160,7 @@ class SearchableMap extends React.Component {
             ) : null}
           </ReactMapGL>
         </div>
+      </div>
       </div>
     );
   }

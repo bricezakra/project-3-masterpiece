@@ -22,6 +22,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+<<<<<<< HEAD
     "dotenv": "^8.2.0",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
@@ -34,4 +35,11 @@
     "reactstrap": "^8.1.1"
   },
   "keywords": []
+=======
+    "express": "^4.16.3",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.3.16",
+    "react-bootstrap": "^1.0.0-beta.14"
+  }
+>>>>>>> d38cbfe1acc87c50cef864c988e13f29ec3505a1
 }
