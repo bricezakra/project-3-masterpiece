@@ -3,10 +3,10 @@ import React from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import About from './About';
-import Contacts from './Contacts';
 import SearchableMap from './SearchableMap';
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import Contacts from './Contacts';
 
 
 function SideNavigation() {
