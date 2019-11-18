@@ -7,7 +7,8 @@ import SearchableMap from './SearchableMap';
 import Contacts from './Contacts';
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Background from '../images/background_image.png';
 
 
 function SideNavigation() {
@@ -63,26 +64,21 @@ function SideNavigation() {
             />
         </Router>
 
-        // <nav>
-        //     <h3> navbar </h3>
-        //     <ul>
-        //         <Link to='/about'>
-        //             <li>About</li>
-        //         </Link>
-        //         <Link to='/map'>
-        //             <li>Map</li>
-        //         </Link>
-        //         <Link to='/shop'>
-        //             <li>Shop</li>
-        //         </Link>
-        //     </ul>
-        // </nav>
+        
     )
 }
 
 const Home = () => (
-    <div style={{ marginLeft: 64 }}>
-      <h1 > Home Page</h1>
+    <div style={{ marginLeft: 64, backgroundImage: `url(${Background})` }}>
+       <Jumbotron>
+                <h1 className="display-3">Welcome to Wi-finder</h1>
+                <p className="display-5">Use the sidenav to navigate our app.</p>
+               
+        </Jumbotron>
+        <div style={{ height: 1000 }}>
+
+        </div>
+        
     </div>
   )
 
