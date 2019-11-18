@@ -10,7 +10,7 @@ function About() {
     return (
 
         <div style={{
-            marginLeft: 64, width: "100%",
+            marginLeft: 64, width: "100%", height: 1200, 
              backgroundImage: `url(${Background})`    
         }}>
             <Jumbotron>

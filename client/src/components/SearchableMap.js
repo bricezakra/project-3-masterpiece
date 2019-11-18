@@ -104,7 +104,7 @@ class SearchableMap extends React.Component {
   render() {
     console.log(this.state.viewport);
     return (
-      <div style={{ backgroundImage: `url(${Background})` }}>
+      <div style={{ backgroundImage: `url(${Background})`, height: 1200 }}>
       <div className="App" style={{marginRight: 200, marginLeft: 200 }}>
         <button onClick={this.setUserLocation}>My location</button>
         <div className="map" style={{ width:"100%"}}>
