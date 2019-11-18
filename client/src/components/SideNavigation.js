@@ -19,7 +19,8 @@ function SideNavigation() {
                             if (location.pathname !== to) {
                                 history.push(to);
                             }
-                        }}
+                        }} 
+                        style={{ height: 1200 }}
                     >
                         <SideNav.Toggle />
                         <SideNav.Nav defaultSelected="home">
